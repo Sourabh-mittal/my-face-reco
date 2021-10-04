@@ -3,6 +3,7 @@ import Navigation from "./components/Navigation/Navigation";
 import Particles from "react-particles-js";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
+import Profile from "./components/Profile/profile";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/SignIn/Signin";
 import Register from "./components/Register/Register";
@@ -30,6 +31,7 @@ const intialState = {
   imageUrl: "",
   route: "Signin",
   isSignedIn: false,
+  inProfile: false,
   valuebox: [],
   user: {
     id: "",
@@ -115,10 +117,15 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === "Signout") {
+      console.log(`i am in ${route}`);
       this.setState({ ...intialState });
       return;
+    } else if (route === "profile") {
+      console.log(`i am in ${route}`);
+      this.setState({ inProfile: true, isSignedIn: false });
     } else if (route === "home") {
-      this.setState({ isSignedIn: true });
+      console.log(`i am in ${route}`);
+      this.setState({ isSignedIn: true, isProfile: false });
     }
     this.setState({ route: route });
   };
@@ -143,6 +150,7 @@ class App extends Component {
         <Navigation
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
+          inProfile={this.state.inProfile}
         />
         {route === "home" ? (
           <div>
@@ -162,6 +170,11 @@ class App extends Component {
           </div>
         ) : route === "Signin" ? (
           <Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
+        ) : route === "profile" ? (
+          <Profile
+            onRouteChange={this.onRouteChange}
+            user_info={this.state.user}
+          />
         ) : (
           <Register
             onRouteChange={this.onRouteChange}
