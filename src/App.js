@@ -8,6 +8,7 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/SignIn/Signin";
 import Register from "./components/Register/Register";
 import Logo from "./components/Logo/Logo";
+import About from "./components/About/About";
 import "./App.css";
 
 const particlesOptions = {
@@ -32,6 +33,7 @@ const intialState = {
   route: "Signin",
   isSignedIn: false,
   inProfile: false,
+  inAbout: false,
   valuebox: [],
   user: {
     id: "",
@@ -117,15 +119,14 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === "Signout") {
-      console.log(`i am in ${route}`);
       this.setState({ ...intialState });
       return;
     } else if (route === "profile") {
-      console.log(`i am in ${route}`);
-      this.setState({ inProfile: true, isSignedIn: false });
+      this.setState({ inProfile: true, isSignedIn: false, inAbout: false });
     } else if (route === "home") {
-      console.log(`i am in ${route}`);
-      this.setState({ isSignedIn: true, isProfile: false });
+      this.setState({ isSignedIn: true, inProfile: false, inAbout: false });
+    } else if (route === "about") {
+      this.setState({ isSignedIn: false, inProfile: false, inAbout: true });
     }
     this.setState({ route: route });
   };
@@ -151,6 +152,7 @@ class App extends Component {
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
           inProfile={this.state.inProfile}
+          inAbout={this.state.inAbout}
         />
         {route === "home" ? (
           <div>
@@ -175,6 +177,8 @@ class App extends Component {
             onRouteChange={this.onRouteChange}
             user_info={this.state.user}
           />
+        ) : route === "about" ? (
+          <About />
         ) : (
           <Register
             onRouteChange={this.onRouteChange}

@@ -1,9 +1,9 @@
 import React from "react";
 
-const Navigation = ({ onRouteChange, isSignedIn, inProfile }) => {
+const Navigation = ({ onRouteChange, isSignedIn, inProfile, inAbout }) => {
   if (isSignedIn === true) {
     return (
-      <nav style={{ display: "flex", justifyContent: "space-between" }}>
+      <nav style={{ display: "flex", justifyContent: "flex-end" }}>
         <h3
           className="f3 link dim black underline pa3 pointer"
           onClick={() => onRouteChange("profile")}
@@ -16,11 +16,46 @@ const Navigation = ({ onRouteChange, isSignedIn, inProfile }) => {
         >
           Sign Out
         </h3>
+        <h3
+          className="f3 link dim black underline pa3 pointer"
+          onClick={() => onRouteChange("about")}
+        >
+          About
+        </h3>
       </nav>
     );
   } else if (inProfile === true) {
     return (
-      <nav style={{ display: "flex", justifyContent: "space-between" }}>
+      <nav style={{ display: "flex", justifyContent: "flex-end" }}>
+        <h3
+          className="f3 link dim black underline pa3 pointer"
+          onClick={() => onRouteChange("home")}
+        >
+          Home
+        </h3>
+        <h3
+          className="f3 link dim black underline pa3 pointer"
+          onClick={() => onRouteChange("Signout")}
+        >
+          Sign Out
+        </h3>
+        <h3
+          className="f3 link dim black underline pa3 pointer"
+          onClick={() => onRouteChange("about")}
+        >
+          About
+        </h3>
+      </nav>
+    );
+  } else if (inAbout === true) {
+    return (
+      <nav style={{ display: "flex", justifyContent: "flex-end" }}>
+        <h3
+          className="f3 link dim black underline pa3 pointer"
+          onClick={() => onRouteChange("profile")}
+        >
+          Profile
+        </h3>
         <h3
           className="f3 link dim black underline pa3 pointer"
           onClick={() => onRouteChange("home")}
