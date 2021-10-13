@@ -6,33 +6,68 @@ class Signin extends React.Component {
     this.state = {
       signInEmail: "",
       signInPassword: "",
+      emailError: "",
+      passwordError: "",
     };
   }
 
   onEmailChange = (event) => {
-    this.setState({ signInEmail: event.target.value });
+    const { value } = event.target;
+    if (value) {
+      this.setState({ signInEmail: value, emailError: "" });
+    } else if (!value) {
+      this.setState({ emailError: "email is required" });
+    }
   };
 
   onPasswordChange = (event) => {
-    this.setState({ signInPassword: event.target.value });
+    const { value } = event.target;
+    if (value) {
+      this.setState({ signInPassword: value, passwordError: "" });
+    } else if (!value) {
+      this.setState({ passwordError: "password is required" });
+    }
+  };
+
+  validator = () => {
+    const { signInEmail, signInPassword } = this.state;
+    let emailError = "";
+    let passwordError = "";
+
+    if (!signInEmail) {
+      emailError = "email is required";
+    }
+
+    if (!signInPassword) {
+      passwordError = "password is required";
+    }
+
+    if (emailError || passwordError) {
+      this.setState({ emailError, passwordError });
+      return false;
+    }
+    return true;
   };
 
   onSubmitSignIn = () => {
-    fetch("https://my-face-reco-api.herokuapp.com/signin", {
-      method: "post",
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify({
-        email: this.state.signInEmail,
-        password: this.state.signInPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          this.props.loadUser(user);
-          this.props.onRouteChange("home");
-        }
-      });
+    const isValid = this.validator();
+    if (isValid) {
+      fetch("https://my-face-reco-api.herokuapp.com/signin", {
+        method: "post",
+        headers: { "content-Type": "application/json" },
+        body: JSON.stringify({
+          email: this.state.signInEmail,
+          password: this.state.signInPassword,
+        }),
+      })
+        .then((response) => response.json())
+        .then((user) => {
+          if (user.id) {
+            this.props.loadUser(user);
+            this.props.onRouteChange("home");
+          }
+        });
+    }
   };
 
   onEnterPush = (e) => {
@@ -58,6 +93,7 @@ class Signin extends React.Component {
                 </label>
                 <input
                   onChange={this.onEmailChange}
+                  onClick={this.onEmailChange}
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="email"
                   name="email-address"
@@ -65,12 +101,17 @@ class Signin extends React.Component {
                   required
                 />
               </div>
+              <div style={{ color: "red", fontsize: 12 }}>
+                {" "}
+                {this.state.emailError}{" "}
+              </div>
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">
                   Password
                 </label>
                 <input
                   onChange={this.onPasswordChange}
+                  onClick={this.onPasswordChange}
                   className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="password"
                   name="password"
@@ -78,8 +119,12 @@ class Signin extends React.Component {
                   required
                 />
               </div>
+              <div style={{ color: "red", fontsize: 12 }}>
+                {" "}
+                {this.state.passwordError}{" "}
+              </div>
             </fieldset>
-            <div className="">
+            <div>
               <input
                 onClick={this.onSubmitSignIn}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f5 dib"

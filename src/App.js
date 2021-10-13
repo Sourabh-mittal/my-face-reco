@@ -12,7 +12,6 @@ import About from "./components/About/About";
 import "./App.css";
 
 const particlesOptions = {
-  //customize this to your liking
   particles: {
     number: {
       value: 120,
