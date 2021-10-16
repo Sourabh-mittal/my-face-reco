@@ -1,5 +1,4 @@
 import React from "react";
-import "./Profile.css";
 
 const initialState = {
   name: "",
