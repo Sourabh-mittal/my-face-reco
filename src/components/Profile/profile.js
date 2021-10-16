@@ -1,8 +1,37 @@
 import React from "react";
+import "./Profile.css";
+
+const initialState = {
+  name: "",
+  email: "",
+  entries: "",
+  joined: "",
+};
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
+    this.state = initialState;
+  }
+
+  componentDidMount() {
+    const { name, email, entries, joined } = this.state;
+    fetch(
+      `https://my-face-reco-api.herokuapp.com/profile/${this.props.user_id}`,
+      {
+        method: "get",
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          name: data.name,
+          email: data.email,
+          entries: data.entries,
+          joined: data.joined,
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -11,10 +40,10 @@ class Profile extends React.Component {
         <main>
           <h1>PROFILE</h1>
           <div>
-            <h3>Name : {this.props.user_info.name} </h3>
-            <h3>Email : {this.props.user_info.email} </h3>
-            <h3>Entries : {this.props.user_info.entries} </h3>
-            <h3>Joined On : {this.props.user_info.joined} </h3>
+            <h3>Name : {this.state.name} </h3>
+            <h3>Email : {this.state.email} </h3>
+            <h3>Entries : {this.state.entries} </h3>
+            <h3>Joined On : {this.state.joined.slice(0, 10)} </h3>
           </div>
         </main>
       </article>

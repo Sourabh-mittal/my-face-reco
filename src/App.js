@@ -172,10 +172,7 @@ class App extends Component {
         ) : route === "Signin" ? (
           <Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
         ) : route === "profile" ? (
-          <Profile
-            onRouteChange={this.onRouteChange}
-            user_info={this.state.user}
-          />
+          <Profile user_id={this.state.user.id} />
         ) : route === "about" ? (
           <About />
         ) : (
