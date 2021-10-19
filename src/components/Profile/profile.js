@@ -35,7 +35,7 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <article>
+      <article className="white">
         <main>
           <h1>PROFILE</h1>
           <div>
