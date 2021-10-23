@@ -1,5 +1,8 @@
 import React from "react";
 
+import { StyledDiv } from "../styles/StyledDiv";
+
+
 const initialState = {
   name: "",
   email: "",
@@ -35,17 +38,15 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <article className="white">
-        <main>
-          <h1>PROFILE</h1>
-          <div>
-            <h3>Name : {this.state.name} </h3>
-            <h3>Email : {this.state.email} </h3>
-            <h3>Entries : {this.state.entries} </h3>
-            <h3>Joined On : {this.state.joined.slice(0, 10)} </h3>
-          </div>
-        </main>
-      </article>
+      <StyledDiv>
+        <h1>PROFILE</h1>
+        <div>
+          <h3>Name : {this.state.name} </h3>
+          <h3>Email : {this.state.email} </h3>
+          <h3>Entries : {this.state.entries} </h3>
+          <h3>Joined On : {this.state.joined.slice(0, 10)} </h3>
+        </div>
+      </StyledDiv>
     );
   }
 }
