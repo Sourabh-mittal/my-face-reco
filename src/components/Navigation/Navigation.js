@@ -1,90 +1,57 @@
 import React from "react";
-
+import Button from "../Button.component";
 const Navigation = ({ onRouteChange, isSignedIn, inProfile, inAbout }) => {
   if (isSignedIn === true) {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("profile")}
-        >
+        <Button onRouteChange={onRouteChange} route={"profile"}>
           Profile
-        </h3>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("Signout")}
-        >
+        </Button>
+        <Button onRouteChange={onRouteChange} route={"Signout"}>
           Sign Out
-        </h3>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("about")}
-        >
+        </Button>
+        <Button onRouteChange={onRouteChange} route={"about"}>
           About
-        </h3>
+        </Button>
       </nav>
     );
   } else if (inProfile === true) {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("home")}
-        >
+        <Button onRouteChange={onRouteChange} route={"home"}>
           Home
-        </h3>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("Signout")}
-        >
+        </Button>
+        <Button onRouteChange={onRouteChange} route={"Signout"}>
           Sign Out
-        </h3>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("about")}
-        >
+        </Button>
+        <Button onRouteChange={onRouteChange} route={"about"}>
           About
-        </h3>
+        </Button>
       </nav>
     );
   } else if (inAbout === true) {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("profile")}
-        >
+        <Button onRouteChange={onRouteChange} route={"profile"}>
           Profile
-        </h3>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("home")}
-        >
+        </Button>
+        <Button onRouteChange={onRouteChange} route={"home"}>
           Home
-        </h3>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("Signout")}
-        >
+        </Button>
+        <Button onRouteChange={onRouteChange} route={"Signout"}>
           Sign Out
-        </h3>
+        </Button>
       </nav>
     );
   } else {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("Signin")}
-        >
+        <Button onRouteChange={onRouteChange} route={"Signin"}>
           Sign In
-        </h3>
-        <h3
-          className="f3 link dim black underline pa3 pointer"
-          onClick={() => onRouteChange("Register")}
-        >
+        </Button>
+        <Button onRouteChange={onRouteChange} route={"Register"}>
           Register
-        </h3>
+        </Button>
       </nav>
     );
   }
